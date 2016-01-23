@@ -22,17 +22,22 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/angular-aria/angular-aria.js',
+      'bower_components/angular-messages/angular-messages.js',
+      'bower_components/angular-material/angular-material.js',
+      'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      "app/scripts/**/*.js",
+      ".tmp/scripts/**/*.js",
       "test/mock/**/*.js",
-      "test/spec/**/*.js"
+      ".tmp/spec/**/*.js"
     ],
 
     // list of files / patterns to exclude
@@ -74,7 +79,7 @@ module.exports = function(config) {
     // proxies: {
     //   '/': 'http://localhost:9000/'
     // },
-    // URL root prevent conflicts with the site root
+    // //URL root prevent conflicts with the site root
     // urlRoot: '_karma_'
   });
 };

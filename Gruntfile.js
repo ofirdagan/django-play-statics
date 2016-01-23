@@ -12,6 +12,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('grunt-connect-proxy');
+
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
@@ -42,7 +44,7 @@ module.exports = function (grunt) {
         tasks: ['typescript:base']
       },
       typescriptTest: {
-        files: ['test/spec/{,*/}*.ts'],
+        files: ['test/spec/**/*.ts'],
         tasks: ['typescript:test', 'karma']
       },
       compass: {
@@ -73,11 +75,16 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [{
+        context: '/api', // the context of the data service
+        host: 'localhost', // wherever the data service is running
+        port: 8000 // the port that the data service is running on
+      }],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
-            return [
+            var middlewares = [
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -89,6 +96,8 @@ module.exports = function (grunt) {
               ),
               connect.static(appConfig.app)
             ];
+            middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+            return middlewares;
           }
         }
       },
@@ -142,7 +151,7 @@ module.exports = function (grunt) {
         ]
       },
       test: {
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/spec/**/*.js']
       }
     },
 
@@ -230,7 +239,7 @@ module.exports = function (grunt) {
         }
       },
       test: {
-        src: ['test/spec/{,*/}*.ts', 'test/e2e/{,*/}*.ts'],
+        src: ['test/spec/**/*.ts', 'test/e2e/**/*.ts'],
           dest: '.tmp/spec',
           options: {
           module: 'amd', //or commonjs
@@ -494,6 +503,7 @@ module.exports = function (grunt) {
       'tsd:refresh',
       'concurrent:server',
       'postcss:server',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);

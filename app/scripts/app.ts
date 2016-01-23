@@ -2,24 +2,30 @@
 /// <reference path="../../typings/angularjs/angular-route.d.ts" />
 
 'use strict';
+angular.module('djangoItunesStaticsAppInternal', []);
 
 angular.module('djangoItunesStaticsApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'ngMaterial',
+    'djangoItunesStaticsAppInternal',
   ])
-  .config(($routeProvider:ng.route.IRouteProvider) => {
+  .config(function ($httpProvider) {
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+  })
+  .config(($routeProvider: ng.route.IRouteProvider) => {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl as main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/albums', {
+        templateUrl: 'views/artists.html',
+        controller: 'ArtistsCtrl as artistsCtrl',
       })
       .otherwise({
         redirectTo: '/'

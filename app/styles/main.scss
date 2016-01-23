@@ -1,5 +1,9 @@
 // bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+
+@import "partials/header";
+@import "partials/artists";
 
 .browsehappy {
   margin: 0.2em 0;

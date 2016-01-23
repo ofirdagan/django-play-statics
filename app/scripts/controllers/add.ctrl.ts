@@ -8,14 +8,20 @@ module djangoItunesStaticsApp {
   }
 
   export class MainCtrl {
+    private artist: string;
 
-    constructor (private $scope: IMainScope) {
+    constructor (private $scope: IMainScope, private iTunesApi: ITunesApi) {
       $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
         'Karma'
       ];
     }
+
+  submit() {
+    this.iTunesApi.addArtist(this.artist);
+  }
+
   }
 }
 

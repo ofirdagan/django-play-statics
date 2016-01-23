@@ -1,0 +1,16 @@
+<div class="artists-page">
+  <section class="left-nav">
+    <ul>
+      <li ng-repeat="artist in artistsCtrl.artists" ng-click="artistsCtrl.select(artist.id)">
+        {{artist.name}}
+      </li>
+    </ul>
+  </section>
+  <section class="right-content">
+    <ul>
+      <li ng-repeat="album in artistsCtrl.artistAlbums">
+        {{album.name}}
+      </li>
+    </ul>
+  </section>
+</div>
