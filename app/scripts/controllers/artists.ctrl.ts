@@ -5,14 +5,15 @@
 module djangoItunesStaticsApp {
 
   export class ArtistsCtrl {
-    private artists: Array<Artist>;
-    private artistAlbums: Array<Album>;
+    private artists: Array<ArtistDto>;
+    private artistAlbums: Array<AlbumDto>;
+    private selected: number;
     /*@ngInject*/
     constructor (private iTunesApi: ITunesApi) {
       this.artists = [];
       this.artistAlbums = [];
 
-      iTunesApi.fetchArtists().then((artists: Array<Artist>) => {
+      iTunesApi.fetchArtists().then((artists: Array<ArtistDto>) => {
         angular.copy(artists, this.artists);
         if(artists.length > 0) {
           this.select(this.artists[0].id);
@@ -20,18 +21,19 @@ module djangoItunesStaticsApp {
       });
     }
     select(artistId: number) {
-      this.iTunesApi.fetchArtistAlbums(artistId).then((albums: Array<Album>) => {
+      this.selected = artistId;
+      this.iTunesApi.fetchArtistAlbums(artistId).then((albums: Array<AlbumDto>) => {
         angular.copy(albums, this.artistAlbums);
       });
     }
   }
 
-  export class Artist {
+  export class ArtistDto {
     name: string;
     id: number;
   }
 
-  export class Album {
+  export class AlbumDto {
     name: string;
     imageUrl: string;
     id: number;

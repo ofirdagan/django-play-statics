@@ -1,6 +1,16 @@
 .navbar-default {
+  background-color: rgb(16,108,200);
   border-color: transparent;
   margin-bottom: 0;
+  border-radius: 0;
+  .navbar-item,
+  .navbar-nav > li > a{
+    color: #ffffff;
+    &:hover,
+    &:focus{
+      color: #e8e8e8;
+    }
+  }
 }
 
 .header.django-header {

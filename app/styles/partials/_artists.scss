@@ -6,12 +6,18 @@
   display: flex;
   min-width: 200px;
   font-size: 18px;
-  border-right: 1px solid #b3d4fc;
+  box-shadow:  1px 0px 1px 0px rgba(0, 0, 0, 0.14);
   flex-direction: column;
 }
 
 .right-content {
+  width: 100%;
+  padding-left: 30px;
+}
 
+.artists-page-wrapper {
+  display: flex;
+  width: 100%;
 }
 
 .list {
@@ -24,3 +30,17 @@
   flex-direction: column;
   flex-grow: 1;
 }
+
+.artist-list-item {
+  &.selected {
+    background-color: rgba(158,158,158,0.3);
+  }
+}
+
+.artist-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+

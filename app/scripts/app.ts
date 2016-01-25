@@ -17,9 +17,14 @@ angular.module('djangoItunesStaticsApp', [
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
   })
-  .config(function($mdThemingProvider) {
+  .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue');
+  })
+  .config(function ($ariaProvider) {
+    $ariaProvider.config({
+      tabindex: false
+    });
   })
   .config(/*@ngInject*/ ($routeProvider: ng.route.IRouteProvider) => {
     $routeProvider

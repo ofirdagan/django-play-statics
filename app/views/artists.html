@@ -1,28 +1,27 @@
 <div class="artists-page">
-  <section class="left-nav">
-    <ul class="list">
-      <li ng-repeat="artist in artistsCtrl.artists track by $index" ng-click="artistsCtrl.select(artist.id)">
-        {{artist.name}}
-      </li>
-    </ul>
-  </section>
-  <section class="right-content">
-    <ul class="list album-list">
-      <li ng-repeat="album in artistsCtrl.artistAlbums track by $index" class="album">
-        <md-card>
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">{{album.name}}</span>
-              <span class="md-subhead">Extra Large</span>
-            </md-card-title-text>
-          </md-card-title>
-          <md-card-content layout="row" layout-align="space-between">
-            <div class="md-media-md card-media">
-              <img ng-src="{{album.imageUrl}}">
-            </div>
-          </md-card-content>
-        </md-card>
-      </li>
-    </ul>
-  </section>
+  <div class="artists-page-wrapper">
+    <section class="left-nav">
+      <md-list class="list">
+        <md-subheader class="md-no-sticky">Artists</md-subheader>
+        <md-list-item ng-repeat="artist in artistsCtrl.artists track by $index"
+                      ng-click="artistsCtrl.select(artist.id)"
+                      class="artist-list-item"
+                      ng-class="{selected: artistsCtrl.selected === artist.id}">
+          <artist-item class="artist-item" artist="artist"></artist-item>
+        </md-list-item>
+      </md-list>
+    </section>
+    <section class="right-content">
+      <md-input-container class="md-icon-float md-block">
+        <label>Search</label>
+        <input ng-model="artistsCtrl.searchTerm" ng-model-options="{debounce:{'default': 500, 'blur': 0 }}" type="text">
+      </md-input-container>
+      <ul class="list album-list">
+        <li ng-repeat="album in artistsCtrl.artistAlbums | orderBy:'-releaseDate' | filter:artistsCtrl.searchTerm track by $index"
+            class="album">
+          <album album="album"></album>
+        </li>
+      </ul>
+    </section>
+  </div>
 </div>
