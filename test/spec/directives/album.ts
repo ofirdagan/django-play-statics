@@ -16,9 +16,8 @@ describe('Directive: album', () => {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(($compile: ng.ICompileService) => {
+  it('should compile', inject(($compile: ng.ICompileService) => {
     element = angular.element('<album></album>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the album directive');
   }));
 });
