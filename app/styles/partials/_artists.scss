@@ -4,11 +4,23 @@
 
 .left-nav {
   display: flex;
-  width: 100px;
+  min-width: 200px;
+  font-size: 18px;
   border-right: 1px solid #b3d4fc;
   flex-direction: column;
 }
 
 .right-content {
 
+}
+
+.list {
+  padding: 0;
+  list-style: none;
+}
+
+.album-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
