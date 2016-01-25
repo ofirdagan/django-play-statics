@@ -3,27 +3,34 @@
 'use strict';
 
 module djangoItunesStaticsApp {
-  export interface IMainScope extends ng.IScope {
-    awesomeThings: any[];
-  }
-
-  export class MainCtrl {
+  export class AddCtrl {
     private artist: string;
-
-    constructor (private $scope: IMainScope, private iTunesApi: ITunesApi) {
-      $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-      ];
+    private loading: boolean;
+    /*@ngInject*/
+    constructor(private iTunesApi: ITunesApi, private $mdToast: any) {
     }
 
-  submit() {
-    this.iTunesApi.addArtist(this.artist);
-  }
+    submit() {
+      this.loading = true;
+      this.iTunesApi.addArtist(this.artist).then((result) => {
+        let text = result.success ? 'All albums added' : 'Artist not found';
+        this.showToast(text);
+      }).catch(() => {
+        this.showToast('Something went wrong, try again')
+      }).finally(() => {
+        this.loading = false;
+      });
+    }
 
+    private showToast(text: string) {
+      this.$mdToast.show(
+        this.$mdToast.simple()
+          .textContent(text)
+          .hideDelay(3000)
+      );
+    }
   }
 }
 
 angular.module('djangoItunesStaticsApp')
-  .controller('MainCtrl', djangoItunesStaticsApp.MainCtrl);
+  .controller('AddCtrl', djangoItunesStaticsApp.AddCtrl);

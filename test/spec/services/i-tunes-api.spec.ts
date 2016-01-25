@@ -16,9 +16,13 @@ describe('Service: iTunesApi', () => {
   }));
 
   it('should add artist', inject(($httpBackend) => {
-    $httpBackend.expectPOST('/api/v1/artists/', {name: 'artist name'}).respond({success: true});
-    iTunesApi.addArtist('artist name');
+    let mockedResult = {success: true};
+    $httpBackend.expectPOST('/api/v1/artists/', {name: 'artist name'}).respond(mockedResult);
+    let result = jasmine.createSpy('result');
+
+    iTunesApi.addArtist('artist name').then(result);
     $httpBackend.flush();
+    expect(result).toHaveBeenCalledWith(mockedResult);
   }));
 
   it('should fetch artists', inject(($httpBackend) => {
@@ -34,7 +38,7 @@ describe('Service: iTunesApi', () => {
 
   it('should fetch albums by artist', inject(($httpBackend) => {
     let mockedResult = [{id: 1, name: 'my-album', imageUrl: 'some-url'}];
-    $httpBackend.expectGET('/api/v1/artists/3/albums').respond(mockedResult);
+    $httpBackend.expectGET('/api/v1/artists/3/albums/').respond(mockedResult);
     let resultSpy = jasmine.createSpy('');
 
     iTunesApi.fetchArtistAlbums(3).then(resultSpy);

@@ -224,7 +224,7 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
-    }, 
+    },
     // Compiles TypeScript to JavaScript
     typescript: {
       base: {
@@ -258,7 +258,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    
+
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {

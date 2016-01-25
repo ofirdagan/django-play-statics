@@ -1,15 +1,27 @@
 <div class="artists-page">
   <section class="left-nav">
-    <ul>
-      <li ng-repeat="artist in artistsCtrl.artists" ng-click="artistsCtrl.select(artist.id)">
+    <ul class="list">
+      <li ng-repeat="artist in artistsCtrl.artists track by $index" ng-click="artistsCtrl.select(artist.id)">
         {{artist.name}}
       </li>
     </ul>
   </section>
   <section class="right-content">
-    <ul>
-      <li ng-repeat="album in artistsCtrl.artistAlbums">
-        {{album.name}}
+    <ul class="list album-list">
+      <li ng-repeat="album in artistsCtrl.artistAlbums track by $index" class="album">
+        <md-card>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">{{album.name}}</span>
+              <span class="md-subhead">Extra Large</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content layout="row" layout-align="space-between">
+            <div class="md-media-md card-media">
+              <img ng-src="{{album.imageUrl}}">
+            </div>
+          </md-card-content>
+        </md-card>
       </li>
     </ul>
   </section>

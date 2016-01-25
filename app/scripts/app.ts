@@ -13,15 +13,19 @@ angular.module('djangoItunesStaticsApp', [
     'ngMaterial',
     'djangoItunesStaticsAppInternal',
   ])
-  .config(function ($httpProvider) {
+  .config(/*@ngInject*/ function ($httpProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
   })
-  .config(($routeProvider: ng.route.IRouteProvider) => {
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue');
+  })
+  .config(/*@ngInject*/ ($routeProvider: ng.route.IRouteProvider) => {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl as main'
+        templateUrl: 'views/add.html',
+        controller: 'AddCtrl as addCtrl'
       })
       .when('/albums', {
         templateUrl: 'views/artists.html',

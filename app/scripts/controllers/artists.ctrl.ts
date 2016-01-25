@@ -7,13 +7,16 @@ module djangoItunesStaticsApp {
   export class ArtistsCtrl {
     private artists: Array<Artist>;
     private artistAlbums: Array<Album>;
-
+    /*@ngInject*/
     constructor (private iTunesApi: ITunesApi) {
       this.artists = [];
       this.artistAlbums = [];
 
       iTunesApi.fetchArtists().then((artists: Array<Artist>) => {
         angular.copy(artists, this.artists);
+        if(artists.length > 0) {
+          this.select(this.artists[0].id);
+        }
       });
     }
     select(artistId: number) {

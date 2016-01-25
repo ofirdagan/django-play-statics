@@ -6,13 +6,14 @@ module djangoItunesStaticsApp {
   import IPromise = angular.IPromise;
   export class ITunesApi {
 
+    /*@ngInject*/
     constructor (private $http: ng.IHttpService) {
 
     }
 
     addArtist(name):any {
       return this.$http.post('/api/v1/artists/', {name: name}).then(response => {
-        console.log(response.data);
+        return response.data;
       });
     };
 
@@ -23,7 +24,7 @@ module djangoItunesStaticsApp {
     }
 
     fetchArtistAlbums(artistId: number): IPromise<any> {
-      return this.$http.get(`/api/v1/artists/${artistId}/albums`).then(response => {
+      return this.$http.get(`/api/v1/artists/${artistId}/albums/`).then(response => {
         return response.data;
       });
     }
